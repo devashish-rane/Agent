@@ -1,0 +1,20 @@
+# Synthetic checks aligned with golden signals and ingestion flows.
+checks:
+  - name: alb-healthcheck
+    description: Hit /actuator/health over the ALB to confirm routing, TLS, and WAF allow-listing.
+    schedule: rate(5 minutes)
+    assertions:
+      - latency_p95_ms < 1200
+      - status_code == 200
+  - name: timeline-ingest
+    description: Post a synthetic note to trigger NoteParserAgent and confirm DynamoDB projection writes.
+    schedule: rate(10 minutes)
+    assertions:
+      - dynamodb_put_success_rate > 0.99
+      - timeline_table_pitr_enabled == true
+  - name: vector-latency
+    description: Check pgvector access path so fallback logic can be validated.
+    schedule: rate(15 minutes)
+    assertions:
+      - pgvector_latency_ms_p95 < 250
+      - rds_connection_errors == 0
