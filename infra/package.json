@@ -1,0 +1,19 @@
+{
+  "name": "frontier-infra",
+  "version": "0.1.0",
+  "bin": {
+    "frontier-infra": "bin/frontier-infra.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.140.0",
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "constructs": "10.3.0",
+    "aws-cdk-lib": "2.140.0"
+  }
+}
