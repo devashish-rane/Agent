@@ -1,0 +1,58 @@
+type Note {
+  id: ID!
+  userId: String!
+  content: String!
+  type: String
+  occurredAt: String
+}
+
+type Goal {
+  id: ID!
+  userId: String!
+  title: String!
+  description: String
+  status: String
+  dueAt: String
+}
+
+type Task {
+  id: ID!
+  userId: String!
+  title: String!
+  description: String
+  status: String
+  dueAt: String
+}
+
+type Query {
+  notesByUser(userId: String!): [Note]
+  goalsByUser(userId: String!): [Goal]
+  tasksByUser(userId: String!): [Task]
+}
+
+type Mutation {
+  createNote(input: NoteRequestInput!): Note
+  createGoal(input: GoalRequestInput!): Goal
+  createTask(input: TaskRequestInput!): Task
+}
+
+input NoteRequestInput {
+  userId: String!
+  content: String!
+  type: String
+  occurredAt: String
+}
+
+input GoalRequestInput {
+  userId: String!
+  title: String!
+  description: String
+  dueAt: String
+}
+
+input TaskRequestInput {
+  userId: String!
+  title: String!
+  description: String
+  dueAt: String
+}
